@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="Inventaire local et identification de clés">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Key Inventory</title>
+</head>
+<body>
+  <header class="topbar">
+    <div><strong>🔐 Key Inventory</strong><small id="subtitle">Clés</small></div>
+    <button id="installBtn" class="ghost" hidden>📲 Installer</button>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <nav class="bottom-nav" aria-label="Navigation principale">
+    <button data-route="keys" class="active">🔑<span>Clés</span></button>
+    <button data-route="analyze">📷<span>Analyser</span></button>
+    <button data-route="loans">🤝<span>Prêts</span></button>
+    <button data-route="sites">📍<span>Sites</span></button>
+    <button data-route="settings">⚙️<span>Réglages</span></button>
+  </nav>
+
+  <dialog id="modal"><form method="dialog" id="modalForm"><div id="modalBody"></div></form></dialog>
+  <input id="photoInput" type="file" accept="image/*" capture="environment" hidden>
+  <script type="module" src="./src/app/main.js"></script>
+</body>
+</html>
