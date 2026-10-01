@@ -8,6 +8,6 @@ export async function get(name,id){const s=await store(name);return new Promise(
 export async function put(name,value){const s=await store(name,'readwrite');return new Promise((res,rej)=>{const r=s.put(value);r.onsuccess=()=>res(value);r.onerror=()=>rej(r.error)})}
 export async function remove(name,id){const s=await store(name,'readwrite');return new Promise((res,rej)=>{const r=s.delete(id);r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
 export async function clear(name){const s=await store(name,'readwrite');return new Promise((res,rej)=>{const r=s.clear();r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
-export async function exportDB(){const data={schemaVersion:1,exportedAt:new Date().toISOString(),data:{}};for(const n of stores)data.data[n]=await all(n);return data}
-export async function importDB(payload){if(payload?.schemaVersion!==1||!payload.data)throw new Error('Format de sauvegarde incompatible');for(const n of stores){await clear(n);for(const item of payload.data[n]||[])await put(n,item)}}
+export async function exportDB(){const data={schemaVersion:2,exportedAt:new Date().toISOString(),data:{}};for(const n of stores)data.data[n]=await all(n);return data}
+export async function importDB(payload){if(![1,2].includes(payload?.schemaVersion)||!payload.data)throw new Error('Format de sauvegarde incompatible');for(const n of stores){await clear(n);for(const item of payload.data[n]||[])await put(n,item)}}
 export {stores};
